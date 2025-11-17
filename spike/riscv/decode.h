@@ -80,6 +80,9 @@ public:
   insn_t(insn_bits_t bits) : b(bits) {}
   insn_bits_t bits() { return b & ~((UINT64_MAX) << (length() * 8)); }
   int length() { return insn_length(b); }
+  uint64_t opcode() { return x(0,7); } //decode opcode of insn
+  uint64_t funct3() { return x(12,3); } //decode funct3 of insn
+  uint64_t funct7() { return x(25,7); } //decode funct7 of insn
   int64_t i_imm() { return int64_t(b) >> 20; }
   int64_t shamt() { return x(20, 6); }
   int64_t s_imm() { return x(7, 5) + (xs(25, 7) << 5); }
